@@ -22,7 +22,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: -5px -5px 12px 0px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         nav {
@@ -32,7 +32,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
 
         nav>a>img {
             height: 90%;
@@ -51,7 +50,6 @@
             text-decoration: none;
             color: black;
             font-weight: bolder;
-
         }
 
         nav .search-bar {
@@ -61,12 +59,14 @@
             justify-content: space-evenly;
             align-items: center;
             border: 2px solid #eeeee4;
+            border-radius: 5px;
         }
 
         nav .search-bar input {
             height: 40px;
             width: 80%;
             border: 0px;
+            outline: none;
         }
 
         nav .nav-icons {
@@ -95,71 +95,106 @@
             margin-top: 4px;
         }
 
-        .product-card {}
+        .cart-container {
+            width: 70%;
+            margin: 30px auto;
+        }
+
+        .cart-header {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .product-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
 
         .product-card>img {
-            width: 200px;
-            height: 200px;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
 
+        .product-details {
+            flex-grow: 1;
+            margin-left: 20px;
         }
 
         .product-name {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 800;
-            margin-left: 10px;
-            margin-top: 15px;
         }
 
         .product-cat {
-            margin-left: 10px;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            color: #666;
+            margin: 5px 0;
         }
 
         .price {
-            margin-left: 10px;
-        }
-
-        .produt-list {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            justify-items: center;
-            gap: 15px;
-            margin: 30px 0px;
-        }
-
-        .btn-cart {
-            all: unset;
-            background: #99b2ff;
-            padding: 6px 10px;
-            border-radius: 5px;
-            margin-top: 5px;
-            margin-left: 10px;
-            cursor: pointer;
             font-weight: 700;
+            font-size: 16px;
         }
 
         .btn-delete {
             all: unset;
-            background: #ff9999;
-            padding: 6px 10px;
+            background: #ff4d4d;
+            color: white;
+            padding: 8px 15px;
             border-radius: 5px;
-            margin-top: 5px;
-            margin-left: 10px;
             cursor: pointer;
             font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: #cc0000;
+        }
+
+        .cart-summary {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .summary-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .summary-total {
+            font-weight: 800;
+            font-size: 18px;
+            margin-top: 10px;
+            border-top: 2px solid #eee;
+            padding-top: 10px;
         }
     </style>
 </head>
 
 <body>
     <header>
-
         <nav>
             <a href="/index.html">
                 <img class="logo" src="https://aartisto.com/wp-content/uploads/2020/11/myntra.png" alt="">
             </a>
-
             <div class="nav-links">
                 <a href="">MEN</a>
                 <a href="">WOMEN</a>
@@ -169,12 +204,10 @@
                 <a href="">GENZ</a>
                 <a href="">STUDIO</a>
             </div>
-
-            <div class="search-bar">
+            <form class="search-bar" action="search.html" method="get">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text">
-            </div>
-
+                <input type="text" name="q" placeholder="Search for products...">
+            </form>
             <div class="nav-icons">
                 <div class="nav-icon-item">
                     <i class="fa-solid fa-user"></i>
@@ -194,87 +227,94 @@
         </nav>
     </header>
 
-
-    <section>
-        <div class="produt-list">
-            <!-- <div class="product-card">
-                <img src="./product.png" alt="image brock">
-                <p class="product-name">White Indian Ware</p>
-                <p class="product-cat">Indian Ware</p>
-                <p class="price">₹2999</p>
-                <button class="btn-cart">Add to Cart</button>
-            </div> -->
+    <section class="cart-container">
+        <h1 class="cart-header">My Shopping Bag</h1>
+        <div class="produt-list"></div>
+        <div class="cart-summary">
+            <h2 class="summary-title">Price Details</h2>
+            <div class="summary-item">
+                <span>Total MRP</span>
+                <span id="total-mrp">₹0</span>
+            </div>
+            <div class="summary-item">
+                <span>Discount on MRP</span>
+                <span id="discount-mrp" style="color: green;">-₹0</span>
+            </div>
+            <div class="summary-item summary-total">
+                <span>Total Amount</span>
+                <span id="total-amount">₹0</span>
+            </div>
         </div>
     </section>
 
-
-
-
     <script>
-
         function deleteFromCart(id) {
             let allProducts = JSON.parse(localStorage.getItem("products")) || [];
-            let productWithoutThatId = allProducts.filter((product) => { return product.id !== id })
-            localStorage.setItem("products", JSON.stringify(productWithoutThatId))
+            let productWithoutThatId = allProducts.filter((product) => product.id !== id);
+            localStorage.setItem("products", JSON.stringify(productWithoutThatId));
+            window.location.reload();
         }
 
-
-        const fetchProducts = async () => {
-            // const res = await fetch('https://dummyjson.com/products')
-            // const data = await res.json()
+        const fetchProducts = () => {
             let allProducts = JSON.parse(localStorage.getItem("products")) || [];
-            if (allProducts) {
+            const productList = document.querySelector(".produt-list");
+            let totalMRP = 0;
+
+            if (allProducts.length > 0) {
                 allProducts.forEach((product) => {
-                    let productList = document.querySelector(".produt-list")
+                    totalMRP += product.price;
 
-                    // create product cart
-                    let productCart = document.createElement("div")
-                    productCart.setAttribute('class', 'product-card')
+                    const productCard = document.createElement("div");
+                    productCard.setAttribute('class', 'product-card');
 
-                    // created image
-                    let image = document.createElement('img')
-                    image.setAttribute('src', product.thumbnail)
-                    image.setAttribute('alt', 'brocken image')
+                    const image = document.createElement('img');
+                    image.setAttribute('src', product.thumbnail);
+                    image.setAttribute('alt', 'broken image');
 
-                    // para tags
-                    let p1 = document.createElement('p')
-                    p1.setAttribute('class', 'product-name')
-                    p1.innerText = product.title
+                    const productDetails = document.createElement('div');
+                    productDetails.setAttribute('class', 'product-details');
 
-                    let p2 = document.createElement('p')
-                    p2.setAttribute('class', 'product-cat')
-                    p2.innerText = product.category
+                    const p1 = document.createElement('p');
+                    p1.setAttribute('class', 'product-name');
+                    p1.innerText = product.title;
 
-                    let p3 = document.createElement('p')
-                    p3.setAttribute('class', 'price')
-                    p3.innerText = '₹' + product.price
+                    const p2 = document.createElement('p');
+                    p2.setAttribute('class', 'product-cat');
+                    p2.innerText = product.category;
 
-                    // create button
-                    let btnCart = document.createElement('button')
-                    btnCart.setAttribute('class', 'btn-delete')
-                    // btnCart.setAttribute('onclick', 'addToCart()')
-                    btnCart.addEventListener('click', () => {
-                       deleteFromCart(product.id)
-                       window.location.reload()
-                    })
-                    btnCart.innerText = 'remove'
+                    const p3 = document.createElement('p');
+                    p3.setAttribute('class', 'price');
+                    p3.innerText = '₹' + product.price;
 
-                    // append all the element we create in productCart
-                    productCart.appendChild(image)
-                    productCart.appendChild(p1)
-                    productCart.appendChild(p2)
-                    productCart.appendChild(p3)
-                    productCart.appendChild(btnCart)
+                    const btnDelete = document.createElement('button');
+                    btnDelete.setAttribute('class', 'btn-delete');
+                    btnDelete.addEventListener('click', () => {
+                        deleteFromCart(product.id);
+                    });
+                    btnDelete.innerText = 'Remove';
 
-                    // append productCart to productList
-                    productList.appendChild(productCart)
+                    productDetails.appendChild(p1);
+                    productDetails.appendChild(p2);
+                    productDetails.appendChild(p3);
 
-                })
+                    productCard.appendChild(image);
+                    productCard.appendChild(productDetails);
+                    productCard.appendChild(btnDelete);
 
+                    productList.appendChild(productCard);
+                });
+            } else {
+                productList.innerHTML = "<p>Your cart is empty.</p>";
             }
+
+            // Update summary
+            const discount = 0; // Assuming a fixed discount for now
+            document.getElementById('total-mrp').innerText = '₹' + totalMRP.toFixed(2);
+            document.getElementById('discount-mrp').innerText = '-₹' + discount.toFixed(2);
+            document.getElementById('total-amount').innerText = '₹' + (totalMRP - discount).toFixed(2);
         }
 
-        fetchProducts()
+        fetchProducts();
     </script>
 
 </body>
