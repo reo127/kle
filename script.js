@@ -1,9 +1,16 @@
 // fetch the product data from API
 
+function addToCart(product) {
+    let allProducts = JSON.parse(localStorage.getItem("products")) || [];
+    allProducts.push(product);
+    localStorage.setItem("products", JSON.stringify(allProducts));
+}
+
+// localStorage.clear()
+
 const fetchProducts = async () => {
     const res = await fetch('https://dummyjson.com/products')
     const data = await res.json()
-    console.log(data.products)
     if (data) {
         data.products.forEach((product) => {
             let productList = document.querySelector(".produt-list")
@@ -33,6 +40,11 @@ const fetchProducts = async () => {
             // create button
             let btnCart = document.createElement('button')
             btnCart.setAttribute('class', 'btn-cart')
+            // btnCart.setAttribute('onclick', 'addToCart()')
+            btnCart.addEventListener('click', () => {
+                console.log(product)
+                addToCart(product)
+            })
             btnCart.innerText = 'Add to Cart'
 
             // append all the element we create in productCart
@@ -52,52 +64,7 @@ const fetchProducts = async () => {
 
 fetchProducts()
 
-// insert that data into the HTML page 
 
+let allProducts = JSON.parse(localStorage.getItem("products")) || [];
+console.log("Current cart contents:", allProducts);
 
-
-
-
-
-
-
-
-
-
-// let productList = document.querySelector(".produt-list")
-
-// // create product cart
-// let productCart = document.createElement("div")
-// productCart.setAttribute('class', 'product-card')
-
-// // created image
-// let image = document.createElement('img')
-// image.setAttribute('src', './product.png')
-// image.setAttribute('alt', 'brocken image')
-
-// // para tags
-// let p1 = document.createElement('p')
-// p1.setAttribute('class', 'product-name')
-// p1.innerText = 'White Indian Ware'
-
-// let p2 = document.createElement('p')
-// p2.setAttribute('class', 'product-cat')
-// p2.innerText = 'Indian Ware'
-
-// let p3 = document.createElement('p')
-// p3.setAttribute('class', 'price')
-// p3.innerText = '₹2999'
-
-// // create button
-// let btnCart = document.createElement('button')
-// btnCart.setAttribute('class', 'btn-cart')
-// btnCart.innerText = 'Add to Cart'
-
-
-// productCart.appendChild(image)
-// productCart.appendChild(p1)
-// productCart.appendChild(p2)
-// productCart.appendChild(p3)
-// productCart.appendChild(btnCart)
-
-// productList.appendChild(productCart)

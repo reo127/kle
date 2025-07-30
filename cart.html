@@ -1,11 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Commerce App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+        }
+
+        header {
+            height: 14vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: -5px -5px 12px 0px;
+        }
+
+        nav {
+            height: 100%;
+            width: 95%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        nav>a>img {
+            height: 90%;
+            cursor: pointer;
+        }
+
+        nav .nav-links {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        nav .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-weight: bolder;
+
+        }
+
+        nav .search-bar {
+            width: 25%;
+            height: 60%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            border: 2px solid #eeeee4;
+        }
+
+        nav .search-bar input {
+            height: 40px;
+            width: 80%;
+            border: 0px;
+        }
+
+        nav .nav-icons {
+            height: 40px;
+            width: 15%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .nav-icon-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .logo {
+            width: 90px;
+        }
+
+        .nav-icon-item>p {
+            font-size: 9px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .product-card {}
+
+        .product-card>img {
+            width: 200px;
+            height: 200px;
+
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 800;
+            margin-left: 10px;
+            margin-top: 15px;
+        }
+
+        .product-cat {
+            margin-left: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            margin-left: 10px;
+        }
+
+        .produt-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            justify-items: center;
+            gap: 15px;
+            margin: 30px 0px;
+        }
+
+        .btn-cart {
+            all: unset;
+            background: #99b2ff;
+            padding: 6px 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .btn-delete {
+            all: unset;
+            background: #ff9999;
+            padding: 6px 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente repudiandae voluptas nisi reprehenderit vel porro pariatur veniam! Assumenda, voluptate autem quasi sit incidunt magni voluptates laborum inventore qui quidem. Iure sapiente molestiae repudiandae recusandae quisquam, voluptas, excepturi adipisci eum asperiores perferendis amet sed quos. At quis ea architecto ad quaerat optio a ut. Explicabo, quo soluta! Exercitationem inventore earum quaerat molestiae ut excepturi blanditiis repellat rerum sit, harum ratione dolores error soluta ex similique doloribus, officia deserunt aperiam quod saepe labore nesciunt accusamus sequi? Dolore quod ipsum dolor hic voluptatum quos, nobis veritatis accusamus saepe soluta et rerum ex eius adipisci eum veniam amet nostrum ducimus harum repellendus illum eligendi labore maxime. Ipsum, quos, asperiores consequatur sint molestiae fugiat eveniet, quaerat atque doloribus suscipit eius iusto aut consequuntur ratione totam illo nulla temporibus autem nesciunt sunt magni! Dolor asperiores, inventore tenetur quasi vero alias officia dolore omnis quaerat perferendis rerum fugit libero doloremque. In voluptatibus dolorum, similique temporibus, blanditiis dignissimos laudantium autem ipsum incidunt nemo voluptate delectus? Cumque dicta recusandae suscipit! Ea qui illum corporis minus neque praesentium, aliquam nostrum eaque a, ut nisi, quos in molestias. Illum, nam quae, repudiandae itaque debitis architecto ducimus asperiores reiciendis vel assumenda porro!</h1>
+    <header>
+
+        <nav>
+            <a href="/index.html">
+                <img class="logo" src="https://aartisto.com/wp-content/uploads/2020/11/myntra.png" alt="">
+            </a>
+
+            <div class="nav-links">
+                <a href="">MEN</a>
+                <a href="">WOMEN</a>
+                <a href="">KIDS</a>
+                <a href="">HOME</a>
+                <a href="">BEAUTY</a>
+                <a href="">GENZ</a>
+                <a href="">STUDIO</a>
+            </div>
+
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text">
+            </div>
+
+            <div class="nav-icons">
+                <div class="nav-icon-item">
+                    <i class="fa-solid fa-user"></i>
+                    <p>Profile</p>
+                </div>
+                <div class="nav-icon-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <p>Wishlist</p>
+                </div>
+                <a href="/cart.html">
+                    <div class="nav-icon-item">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <p>Bag</p>
+                    </div>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+
+    <section>
+        <div class="produt-list">
+            <!-- <div class="product-card">
+                <img src="./product.png" alt="image brock">
+                <p class="product-name">White Indian Ware</p>
+                <p class="product-cat">Indian Ware</p>
+                <p class="price">₹2999</p>
+                <button class="btn-cart">Add to Cart</button>
+            </div> -->
+        </div>
+    </section>
+
+
+
+
+    <script>
+
+        function deleteFromCart(id) {
+            let allProducts = JSON.parse(localStorage.getItem("products")) || [];
+            let productWithoutThatId = allProducts.filter((product) => { return product.id !== id })
+            localStorage.setItem("products", JSON.stringify(productWithoutThatId))
+        }
+
+
+        const fetchProducts = async () => {
+            // const res = await fetch('https://dummyjson.com/products')
+            // const data = await res.json()
+            let allProducts = JSON.parse(localStorage.getItem("products")) || [];
+            if (allProducts) {
+                allProducts.forEach((product) => {
+                    let productList = document.querySelector(".produt-list")
+
+                    // create product cart
+                    let productCart = document.createElement("div")
+                    productCart.setAttribute('class', 'product-card')
+
+                    // created image
+                    let image = document.createElement('img')
+                    image.setAttribute('src', product.thumbnail)
+                    image.setAttribute('alt', 'brocken image')
+
+                    // para tags
+                    let p1 = document.createElement('p')
+                    p1.setAttribute('class', 'product-name')
+                    p1.innerText = product.title
+
+                    let p2 = document.createElement('p')
+                    p2.setAttribute('class', 'product-cat')
+                    p2.innerText = product.category
+
+                    let p3 = document.createElement('p')
+                    p3.setAttribute('class', 'price')
+                    p3.innerText = '₹' + product.price
+
+                    // create button
+                    let btnCart = document.createElement('button')
+                    btnCart.setAttribute('class', 'btn-delete')
+                    // btnCart.setAttribute('onclick', 'addToCart()')
+                    btnCart.addEventListener('click', () => {
+                       deleteFromCart(product.id)
+                       window.location.reload()
+                    })
+                    btnCart.innerText = 'remove'
+
+                    // append all the element we create in productCart
+                    productCart.appendChild(image)
+                    productCart.appendChild(p1)
+                    productCart.appendChild(p2)
+                    productCart.appendChild(p3)
+                    productCart.appendChild(btnCart)
+
+                    // append productCart to productList
+                    productList.appendChild(productCart)
+
+                })
+
+            }
+        }
+
+        fetchProducts()
+    </script>
+
 </body>
+
 </html>
